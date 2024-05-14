@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { isLoggedIn, userID } from './Context';
 
 const Div = styled.header`
   display: flex;
@@ -37,14 +38,16 @@ const Div = styled.header`
   }
 `;
 
-function Header({ isLoggedIn, userID } : { isLoggedIn: boolean, userID: string | null }) : JSX.Element {
+function Header() : JSX.Element {
+  const flag = useContext(isLoggedIn);
+  const id = useContext(userID);
   return (
     <Div className="header">
         <div className="left-logo">Graph Visualizer</div>
         <div className="right-box"> 
           <ul className="menu">
             <li><a href="www.naver.com">CLOUD</a></li>
-            {isLoggedIn && userID !== null ? (<li><a href="sss">{userID.toUpperCase()}</a></li>) : 
+            {flag && id !== null ? (<li><a href="sss">{id.toUpperCase()}</a></li>) : 
             (<><li><a href="sss">LOGIN</a></li><li><a href="sss">SIGNUP</a></li></>)}
           </ul>
         </div>  

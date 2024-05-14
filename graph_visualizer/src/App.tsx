@@ -3,27 +3,18 @@ import { useState } from 'react';
 import Header from './Header';
 import Body from './Body';
 
-const LoginInfoContext = React.createContext<((check : boolean, id : string | null) => void) | null>(null);
+import { isLoggedIn, userID } from './Context';
 
 function App() : JSX.Element {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [userID, setUserID] = useState<string | null>(null);
-  const setLoginInfo = (check : boolean, id : string | null) => {
-    if(check) {
-      setIsLoggedIn(true);
-      setUserID(id);
-    } else {
-      setIsLoggedIn(false);
-      setUserID(null);
-    }
-  };
   return (
-    <LoginInfoContext.Provider value={setLoginInfo}>
-      <div className="App">
-        <Header isLoggedIn={isLoggedIn} userID={userID} />
-        <Body />
-      </div>
-    </LoginInfoContext.Provider>
+    <isLoggedIn.Provider value={false}>
+      <userID.Provider value={null}>
+        <div className="App">
+          <Header />
+          <Body />
+        </div>
+      </userID.Provider>
+    </isLoggedIn.Provider>
   );
 }
 

@@ -120,4 +120,4 @@ const Screen = ({ data } : { data : string }) => {
     );
 };
 
-export default Screen;
+export default React.memo(Screen);

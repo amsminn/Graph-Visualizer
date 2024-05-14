@@ -60,4 +60,4 @@ function Painter({ data } : { data : string }) : JSX.Element {
     );
 }
 
-export default Painter;
+export default React.memo(Painter);

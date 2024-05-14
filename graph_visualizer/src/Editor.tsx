@@ -44,7 +44,7 @@ const Div = styled.div`
         .Line-Numbers {
             width: 10%;
             height: 500px;
-            color = white;
+            color: white;
             text-align: center;
             font-size: 15px;
             white-space: pre-line;
@@ -62,6 +62,7 @@ const Div = styled.div`
             margin: 0px;
             white-space: pre-line;
             white-space: pre-wrap;
+            resize: none;
         }
     }
 `;
