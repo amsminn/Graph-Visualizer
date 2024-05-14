@@ -1,14 +1,15 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useContext } from 'react';
 import Header from './Header';
 import Body from './Body';
 
 import { isLoggedIn, userID } from './Context';
 
 function App() : JSX.Element {
+  const flag = useContext(isLoggedIn);
+  const id = useContext(userID);
   return (
-    <isLoggedIn.Provider value={false}>
-      <userID.Provider value={null}>
+    <isLoggedIn.Provider value={flag}>
+      <userID.Provider value={id}>
         <div className="App">
           <Header />
           <Body />

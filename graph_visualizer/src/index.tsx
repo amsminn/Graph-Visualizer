@@ -7,11 +7,42 @@ import SignUp from './SignUp';
 import Cloud from './Cloud';
 import reportWebVitals from './reportWebVitals';
 
+import { createRoot } from 'react-dom/client';
+import {
+  createBrowserRouter, 
+  RouterProvider,
+  Route,
+  Link
+} from 'react-router-dom';
+
+const Router = createBrowserRouter([
+  {
+    path: '/',
+    element: (<App />)
+  },
+  {
+    path: '/SignUp',
+    element: (<SignUp />)
+  },
+  {
+    path: '/LogIn',
+    element: (<LogIn />)
+  },
+  {
+    path: '/Cloud',
+    element: (<Cloud />)
+  },
+  {
+    path: '/Cloud/:id',
+    element: (<Cloud />)
+  },
+]);
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-    <Cloud />
+    <RouterProvider router={Router} />
 );
 
 // If you want to start measuring performance in your app, pass a function

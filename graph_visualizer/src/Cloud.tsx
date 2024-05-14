@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import Header from './Header';
+import { isLoggedIn, userID } from './Context';
 
 const StyledDiv = styled.div`
     border-radius: 10px;
@@ -36,10 +37,15 @@ const StyledDiv = styled.div`
 `;
 
 function Cloud(): JSX.Element {
-
+    const flag = useContext(isLoggedIn);
+    const id = useContext(userID);
     return (
         <>
-            <Header></Header>
+            <isLoggedIn.Provider value={flag}>
+                <userID.Provider value={id}>
+                    <Header></Header>
+                </userID.Provider>
+            </isLoggedIn.Provider>
             <StyledDiv>
                 <h1>Board</h1>
                 <table>
@@ -51,7 +57,6 @@ function Cloud(): JSX.Element {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* Replace this with your actual data */}
                         <tr>
                             <td>Sample Title</td>
                             <td>Sample Author</td>

@@ -1,5 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Stage, Layer, Circle, Arrow, Group, Text } from "react-konva";
+import styled from "styled-components";
+
+const OuterDiv = styled.div`
+    margin-top: 15px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 10px;
+    border-width: 0.5px;
+    height: 500px;
+    overflow: hidden;
+`;
 
 interface Node {
     x: number;
@@ -68,11 +79,17 @@ const Screen = ({ data } : { data : string }) => {
     const [edges, updateEdges] = React.useState<[number, number][]>([]);
 
     const vertex = parseInt(data.trim().split("\n")[0]);
+    
+    const outerDiv = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         let size = parseInt(data.split("\n")[0]);
         let ret = [];
-        for(let i = 1; i <= size; i++) ret.push(VERTEX_DEFAULTS);
+        for(let i = 1; i <= size; i++) ret.push({
+            ...VERTEX_DEFAULTS,
+            x : Math.random() * (outerDiv.current?.clientWidth || 0),
+            y : Math.random() * (outerDiv.current?.clientHeight || 0)
+        });
         updateNodes(ret);
     }, [vertex]);
 
@@ -85,38 +102,40 @@ const Screen = ({ data } : { data : string }) => {
         }
         updateEdges(ret);
     }, [data]);
-
+    console.log(outerDiv.current?.clientWidth);
     return (
-        <Stage width={window.innerWidth} height={window.innerHeight}>
-        <Layer>
-            {
-                edges.map(([a, b]) => {
-                    return (
-                        <Edge node1={nodes[a - 1]} node2={nodes[b - 1]}/>
-                    );
-                })
-            }
-            { 
-                nodes.map((node: Node, index:number) => {
-                    return (
-                        <>
-                            <Circle
-                                {...node}
-                                onDragMove = {e => {
-                                    const i = nodes.indexOf(node);
-                                    const newNodes = [...nodes];
-                                    newNodes[i] = { ...nodes[i], ...e.target.position() };
-                                    updateNodes(newNodes);
-                                }}
-                            />
-                            <Text text={(index + 1).toString()} x={node.x - 3} y={node.y - 5} 
-                            />
-                        </>
-                    );
-                })
-            }
-        </Layer>
-        </Stage>
+        <OuterDiv ref={outerDiv}>
+            <Stage width={outerDiv.current?.clientWidth || 0} height={500}>
+                <Layer>
+                    {
+                        edges.map(([a, b]) => {
+                            return (
+                                <Edge node1={nodes[a - 1]} node2={nodes[b - 1]}/>
+                            );
+                        })
+                    }
+                    { 
+                        nodes.map((node: Node, index:number) => {
+                            return (
+                                <>
+                                    <Circle
+                                        {...node}
+                                        onDragMove = {e => {
+                                            const i = nodes.indexOf(node);
+                                            const newNodes = [...nodes];
+                                            newNodes[i] = { ...nodes[i], ...e.target.position() };
+                                            updateNodes(newNodes);
+                                        }}
+                                    />
+                                    <Text text={(index + 1).toString()} x={node.x - 3} y={node.y - 5} 
+                                    />
+                                </>
+                            );
+                        })
+                    }
+                </Layer>
+            </Stage>
+        </OuterDiv>
     );
 };
 

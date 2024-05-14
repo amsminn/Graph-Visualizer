@@ -35,15 +35,6 @@ const Div = styled.div`
             margin-left: 0;
         }
     }
-    .Screen {
-        margin-top: 15px;
-        border-style: solid;
-        border-color: black;
-        border-radius: 10px;
-        border-width: 0.5px;
-        height: 500px;
-        overflow: hidden;
-    }
 `;
 
 function Painter({ data } : { data : string }) : JSX.Element {
@@ -53,9 +44,7 @@ function Painter({ data } : { data : string }) : JSX.Element {
                 <button className="save">SAVE</button>
                 <button className="import">IMPORT</button>
             </div>
-            <div className="Screen">
-                <Screen data={data}/>
-            </div>
+            <Screen data={data}/>
         </Div>
     );
 }

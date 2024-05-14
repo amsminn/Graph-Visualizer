@@ -44,7 +44,7 @@ const Div = styled.div`
         .Line-Numbers {
             width: 10%;
             height: 500px;
-            color: white;
+            color: black;
             text-align: center;
             font-size: 15px;
             white-space: pre-line;
