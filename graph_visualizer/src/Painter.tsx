@@ -37,12 +37,23 @@ const Div = styled.div`
     }
 `;
 
+const SaveImageButton = styled.button`
+    background-color: #4b4e6a;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    color: white;
+    margin-left: 20px;
+`;
+
 function Painter({ data, flag } : { data : string, flag : boolean }) : JSX.Element {
     return (
         <Div>
             <div className="load-export">
                 <button className="save">SAVE</button>
                 <button className="import">IMPORT</button>
+                <SaveImageButton>SAVE as JPG</SaveImageButton>
             </div>
             <Screen data={data} flag={flag}/>
         </Div>
