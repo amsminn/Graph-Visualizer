@@ -60,7 +60,7 @@ function Cloud(): JSX.Element {
                         <tr>
                             <td>Sample Title</td>
                             <td>Sample Author</td>
-                            <td>2022-01-01</td>
+                            <td>2022-05-15</td>
                         </tr>
                     </tbody>
                 </table>

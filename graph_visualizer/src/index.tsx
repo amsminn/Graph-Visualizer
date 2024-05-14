@@ -7,12 +7,9 @@ import SignUp from './SignUp';
 import Cloud from './Cloud';
 import reportWebVitals from './reportWebVitals';
 
-import { createRoot } from 'react-dom/client';
 import {
   createBrowserRouter, 
   RouterProvider,
-  Route,
-  Link
 } from 'react-router-dom';
 
 const Router = createBrowserRouter([

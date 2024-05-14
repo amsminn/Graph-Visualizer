@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Stage, Layer, Circle, Arrow, Group, Text } from "react-konva";
 import styled from "styled-components";
 
