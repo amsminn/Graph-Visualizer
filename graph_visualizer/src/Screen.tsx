@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { Stage, Layer, Circle, Arrow, Group, Text } from "react-konva";
 import styled from "styled-components";
 
@@ -32,7 +32,7 @@ const VERTEX_DEFAULTS: Node = {
   draggable: true
 };
 
-const Edge = ({ node1, node2 }: { node1: Node, node2: Node }) => {
+const Edge = ({ node1, node2, flag }: { node1: Node, node2: Node, flag : boolean }) => {
   const dx = node1.x - node2.x;
   const dy = node1.y - node2.y;
   let angle = Math.atan2(-dy, dx);
@@ -68,13 +68,13 @@ const Edge = ({ node1, node2 }: { node1: Node, node2: Node }) => {
         stroke="#000"
         fill="#000"
         strokeWidth={2}
-        pointerWidth={5}
+        pointerWidth={flag?0:5}
       />
     </Group>
   );
 };
 
-const Screen = ({ data } : { data : string }) => {
+const Screen = ({ data, flag } : { data : string, flag : boolean }) => {
     const [nodes, updateNodes] = React.useState<Node[]>([]);
     const [edges, updateEdges] = React.useState<[number, number][]>([]);
 
@@ -110,7 +110,7 @@ const Screen = ({ data } : { data : string }) => {
                     {
                         edges.map(([a, b]) => {
                             return (
-                                <Edge node1={nodes[a - 1]} node2={nodes[b - 1]}/>
+                                <Edge node1={nodes[a - 1]} node2={nodes[b - 1]} flag={flag} />
                             );
                         })
                     }

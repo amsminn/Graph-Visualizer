@@ -23,6 +23,7 @@ const Div = styled.div`
 `;
 
 function Body() : JSX.Element {
+  const [flag, setFlag] = useState(false);
   const [text, setText] = useState<string>("");
   const [lineNum, setLineNum] = useState<string>("");
   const onChange = (e : React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -35,10 +36,10 @@ function Body() : JSX.Element {
   return (
     <Div>
         <span>
-          <Editor text={text} setText={setText} lineNum={lineNum} setLineNum={setLineNum} onChange={onChange}/>
+          <Editor text={text} setText={setText} lineNum={lineNum} setLineNum={setLineNum} onChange={onChange} flag={flag} setFlag={setFlag} />
         </span>
         <span className="Painter">
-          <Painter data={text}/>
+          <Painter data={text} flag={flag}/>
         </span>
     </Div>
   );

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useState } from 'react';
 
 const Div = styled.div`
     flex-direction: row;
@@ -14,20 +15,11 @@ const Div = styled.div`
         button {
             flex: 1;
             border: none;
-            background-color: #202e3e;
             color: white;
             font-size: 13px;
             font-weight: bold;
             margin: 0px;
             width: 50%;
-        }
-        .directed {
-            border-top-left-radius: 20px;
-            border-bottom-left-radius: 20px;
-        }
-        .undirected {
-            border-top-right-radius: 20px;
-            border-bottom-right-radius: 20px;
         }
     }
     .AdjInput {
@@ -67,17 +59,38 @@ const Div = styled.div`
     }
 `;
 
-function Editor({ text, setText, lineNum, setLineNum, onChange } :
+interface DirectedButtonProps {
+    isSelected: boolean;
+}
+
+const DirectedButton = styled.button<DirectedButtonProps>`
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: ${props => props.isSelected ? '#4b4e6a' : '#202e3e'};
+`;
+
+interface UnDirectedButtonProps {
+    isSelected: boolean;
+}
+
+const UnDirectedButton = styled.button<UnDirectedButtonProps>`
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: ${props => props.isSelected ? '#4b4e6a' : '#202e3e'};
+`;
+
+function Editor({ text, setText, lineNum, setLineNum, onChange, flag, setFlag } :
     {   
         text: string, setText: React.Dispatch<React.SetStateAction<string>>, lineNum: string, 
         setLineNum: React.Dispatch<React.SetStateAction<string>>, onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
+        flag: boolean, setFlag: React.Dispatch<React.SetStateAction<boolean>>
     }
 ) : JSX.Element {
     return (
         <Div>
             <div className="Mode">
-                <button className="directed">DIRECTED</button>
-                <button className="undirected">UNDIRECTED</button>
+                <DirectedButton isSelected={!flag} onClick={(e)=>{setFlag(false);}}>DIRECTED</DirectedButton>
+                <UnDirectedButton isSelected={flag} onClick={(e)=>{setFlag(true);}}>UNDIRECTED</UnDirectedButton>
             </div>
             <div className="AdjInput">
                 <div className="Line-Numbers">{lineNum}</div>

@@ -37,14 +37,14 @@ const Div = styled.div`
     }
 `;
 
-function Painter({ data } : { data : string }) : JSX.Element {
+function Painter({ data, flag } : { data : string, flag : boolean }) : JSX.Element {
     return (
         <Div>
             <div className="load-export">
                 <button className="save">SAVE</button>
                 <button className="import">IMPORT</button>
             </div>
-            <Screen data={data}/>
+            <Screen data={data} flag={flag}/>
         </Div>
     );
 }

@@ -4,7 +4,7 @@ import Body from './Body';
 
 import { isLoggedIn, userID } from './Context';
 
-function App() : JSX.Element {
+function App(): JSX.Element {
   const flag = useContext(isLoggedIn);
   const id = useContext(userID);
   return (
