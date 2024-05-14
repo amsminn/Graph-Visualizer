@@ -37,18 +37,15 @@ const Div = styled.header`
   }
 `;
 
-const isLoggedIn = true; // Replace 'true' with your actual login check logic
-const userID = "amsminn"; // Replace 'JohnDoe' with the actual user's name
-
-function Header() {
+function Header({ isLoggedIn, userID } : { isLoggedIn: boolean, userID: string | null }) : JSX.Element {
   return (
     <Div className="header">
         <div className="left-logo">Graph Visualizer</div>
         <div className="right-box"> 
           <ul className="menu">
             <li><a href="www.naver.com">CLOUD</a></li>
-            {isLoggedIn ? (<li><a href="www.naver.com">{userID.toUpperCase()}</a></li>) : 
-            (<React.Fragment><li><a href="www.naver.com">LOGIN</a></li><li><a href="www.naver.com">SIGNUP</a></li></React.Fragment>)}
+            {isLoggedIn && userID !== null ? (<li><a href="sss">{userID.toUpperCase()}</a></li>) : 
+            (<><li><a href="sss">LOGIN</a></li><li><a href="sss">SIGNUP</a></li></>)}
           </ul>
         </div>  
     </Div>

@@ -1,8 +1,6 @@
 import React from 'react';
-// import { useState, useRef } from 'react';
 import styled from 'styled-components';
 
-// textarea must show row numbers
 const Div = styled.div`
     flex-direction: row;
     width:100%;
@@ -21,7 +19,7 @@ const Div = styled.div`
             font-size: 13px;
             font-weight: bold;
             margin: 0px;
-            witdh: 50%;
+            width: 50%;
         }
         .directed {
             border-top-left-radius: 20px;
@@ -48,25 +46,32 @@ const Div = styled.div`
             height: 500px;
             color = white;
             text-align: center;
+            font-size: 15px;
+            white-space: pre-line;
+            white-space: pre-wrap;
         }
         textarea {
             width: 90%;
             height: 500px;
             background-color: white;
-            color: white;
+            color: black;
             font-size: 15px;
             padding: 0px;
             border: none;
             outline: none;
             margin: 0px;
+            white-space: pre-line;
+            white-space: pre-wrap;
         }
     }
 `;
 
-function Editor() {
-    // const [text, setText] = React.useState("Input adjacency list here.");
-    // const lines = useRef();
-    
+function Editor({ text, setText, lineNum, setLineNum, onChange } :
+    {   
+        text: string, setText: React.Dispatch<React.SetStateAction<string>>, lineNum: string, 
+        setLineNum: React.Dispatch<React.SetStateAction<string>>, onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
+    }
+) : JSX.Element {
     return (
         <Div>
             <div className="Mode">
@@ -74,8 +79,8 @@ function Editor() {
                 <button className="undirected">UNDIRECTED</button>
             </div>
             <div className="AdjInput">
-                <div className="Line-Numbers">1</div>
-                <textarea className="Input-Box" value="text"></textarea>
+                <div className="Line-Numbers">{lineNum}</div>
+                <textarea onChange={onChange} value={text}></textarea>
             </div>
         </Div>
     );
