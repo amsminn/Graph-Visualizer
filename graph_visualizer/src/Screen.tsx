@@ -110,7 +110,7 @@ const Screen = ({ data, flag } : { data : string, flag : boolean }) => {
                     {
                         edges.map(([a, b]) => {
                             return (
-                                <Edge node1={nodes[a - 1]} node2={nodes[b - 1]} flag={flag} />
+                                <Edge node2={nodes[a - 1]} node1={nodes[b - 1]} flag={flag} />
                             );
                         })
                     }
