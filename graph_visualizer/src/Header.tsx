@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { isLoggedIn, userID } from './Context';
+import { Link } from 'react-router-dom';
 
 const Div = styled.header`
   display: flex;
@@ -14,6 +15,7 @@ const Div = styled.header`
     left: 10px;
     font-size: 20px;
     font-weight: bold;
+    text-decoration: none;
   }
   .right-box {
     position: absolute;
@@ -38,18 +40,40 @@ const Div = styled.header`
   }
 `;
 
+const StyledLink = styled(Link)`
+  margin: 10px;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+  text-decoration: none;
+`;
+
+const Logo = styled(Link)`
+  margin: 10px;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 20px;
+  text-decoration: none;
+`;
+
 function Header() : JSX.Element {
   const flag = useContext(isLoggedIn);
   const id = useContext(userID);
   return (
     <Div className="header">
-        <div className="left-logo">Graph Visualizer</div>
+        <div className="left-logo"><Logo to="/">Graph Visualizer</Logo></div>
         <div className="right-box"> 
           <ul className="menu">
-            <li><a href="www.naver.com">CLOUD</a></li>
-            {flag && id !== null ? (<li><a href="sss">{id.toUpperCase()}</a></li>) : 
-            (<><li><a href="sss">LOGIN</a></li><li><a href="sss">SIGNUP</a></li></>)}
-          </ul>
+            <li><StyledLink to="/Cloud">CLOUD</StyledLink></li>
+            {flag && id !== null ? (<li><p>{id.toUpperCase()}</p></li>) : 
+            (<><li><StyledLink to="LogIn">LOGIN</StyledLink></li><li><StyledLink to="SignUp">SIGNUP</StyledLink></li></>)}
+          </ul> 
         </div>  
     </Div>
   );

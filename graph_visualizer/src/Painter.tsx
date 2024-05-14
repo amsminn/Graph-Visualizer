@@ -24,7 +24,7 @@ const Div = styled.div`
             width: 30%;
         }
         .save {
-            background-color: #353535;
+            background-color: #4b4e6a;
             border-top-left-radius: 20px;
             border-bottom-left-radius: 20px;
             margin-right: 0;
