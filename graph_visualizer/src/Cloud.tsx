@@ -47,7 +47,7 @@ function Cloud(): JSX.Element {
                 </userID.Provider>
             </isLoggedIn.Provider>
             <StyledDiv>
-                <h1>Board</h1>
+                <h1>Cloud</h1>
                 <table>
                     <thead>
                         <tr>
