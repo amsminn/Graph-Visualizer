@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Stage, Layer, Circle, Arrow, Group, Text } from "react-konva";
+import { Stage, Layer, Circle, Arrow, Group, Text, Rect } from "react-konva";
 import styled from "styled-components";
 
 const OuterDiv = styled.div`
@@ -74,7 +74,7 @@ const Edge = ({ node1, node2, flag }: { node1: Node, node2: Node, flag : boolean
   );
 };
 
-const Screen = ({ data, flag } : { data : string, flag : boolean }) => {
+const Screen = ({ data, flag, canvasRef } : { data : string, flag : boolean, canvasRef : any }) => {
     const [nodes, updateNodes] = React.useState<Node[]>([]);
     const [edges, updateEdges] = React.useState<[number, number][]>([]);
 
@@ -102,10 +102,10 @@ const Screen = ({ data, flag } : { data : string, flag : boolean }) => {
         }
         updateEdges(ret);
     }, [data]);
-    console.log(outerDiv.current?.clientWidth);
+
     return (
         <OuterDiv ref={outerDiv}>
-            <Stage width={outerDiv.current?.clientWidth || 0} height={500}>
+            <Stage width={outerDiv.current?.clientWidth || 0} height={500} ref={canvasRef}>
                 <Layer>
                     {
                         edges.map(([a, b]) => {

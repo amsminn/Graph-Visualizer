@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Screen from './Screen';
+import { useRef } from 'react';
 
 const Div = styled.div`
     display: flex;
@@ -48,14 +49,25 @@ const SaveImageButton = styled.button`
 `;
 
 function Painter({ data, flag } : { data : string, flag : boolean }) : JSX.Element {
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const onClick = () => {
+        if(canvasRef && canvasRef.current) {
+            const canvas = canvasRef.current;
+            const image = canvas.toDataURL();
+            const a = document.createElement("a");
+            a.href = image;
+            a.download = "canvas.jpg";
+            a.click();
+        }
+    };
     return (
         <Div>
             <div className="load-export">
                 <button className="save">SAVE</button>
                 <button className="import">IMPORT</button>
-                <SaveImageButton>SAVE as JPG</SaveImageButton>
+                <SaveImageButton onClick={onClick}>SAVE as JPG</SaveImageButton>
             </div>
-            <Screen data={data} flag={flag}/>
+            <Screen data={data} flag={flag} canvasRef={canvasRef} />
         </Div>
     );
 }
