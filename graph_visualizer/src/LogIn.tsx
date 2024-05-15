@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import styled from 'styled-components';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const StyledDiv = styled.div`
     display: flex;
@@ -49,16 +50,40 @@ const StyledDiv = styled.div`
 `;
 
 function LogIn() : JSX.Element {
+    const id = React.useRef<HTMLInputElement>(null);
+    const password = React.useRef<HTMLInputElement>(null);
+    const navigate = useNavigate();
+    const onClick = async (e : React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        const res = await fetch("http://localhost:3001/api/LogIn", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id: id.current?.value,
+                password: password.current?.value
+            })
+        });
+        const data = await res.json();
+        alert(data.message);
+        if(data.success) {
+            navigate("/");
+        }
+    };
+    const signup = () => {
+        navigate ("/SignUp");
+    };
     return (
         <>
             <Header />
             <StyledDiv>
                 <h1>LOGIN</h1>
                 <form>
-                    <input type="text" placeholder="ID"/>
-                    <input type="password" placeholder="Password"/>
-                    <button>LogIn</button>
-                    <button>SignUp</button>
+                    <input type="text" placeholder="ID" ref={id}/>
+                    <input type="password" placeholder="Password" ref={password}/>
+                    <button onClick={onClick}>LogIn</button>
+                    <button onClick={signup}>SignUp</button>
                 </form>
             </StyledDiv>
         </>

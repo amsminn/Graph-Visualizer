@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Stage, Layer, Circle, Arrow, Group, Text, Rect } from "react-konva";
+import { Stage, Layer, Circle, Arrow, Group, Text } from "react-konva";
 import styled from "styled-components";
 
 const OuterDiv = styled.div`
