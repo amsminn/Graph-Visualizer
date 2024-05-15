@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Header from './Header';
 
 const StyledDiv = styled.div`
     display: flex;
@@ -49,16 +50,19 @@ const StyledDiv = styled.div`
 
 function SignUp() : JSX.Element {
     return (
-        <StyledDiv>
-            <h1>SIGN UP</h1>
-            <form>
-                <input type="text" placeholder="ID"/>
-                <input type="email" placeholder="Email"/>
-                <input type="password" placeholder="Password"/>
-                <input type="password" placeholder="Confirm Password"/>
-                <button>Sign Up</button>
-            </form>
-        </StyledDiv>
+        <>
+            <Header />
+            <StyledDiv>
+                <h1>SIGNUP</h1>
+                <form>
+                    <input type="text" placeholder="ID"/>
+                    <input type="email" placeholder="Email"/>
+                    <input type="password" placeholder="Password"/>
+                    <input type="password" placeholder="Confirm Password"/>
+                    <button>SignUp</button>
+                </form>
+            </StyledDiv>
+        </>
     );
 }
 

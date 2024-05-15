@@ -72,7 +72,7 @@ function Header() : JSX.Element {
           <ul className="menu">
             <li><StyledLink to="/Cloud">CLOUD</StyledLink></li>
             {flag && id !== null ? (<li><p>{id.toUpperCase()}</p></li>) : 
-            (<><li><StyledLink to="LogIn">LOGIN</StyledLink></li><li><StyledLink to="SignUp">SIGNUP</StyledLink></li></>)}
+            (<><li><StyledLink to="/LogIn">LOGIN</StyledLink></li><li><StyledLink to="/SignUp">SIGNUP</StyledLink></li></>)}
           </ul> 
         </div>  
     </Div>

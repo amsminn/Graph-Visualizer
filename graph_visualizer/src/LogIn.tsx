@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from './Header';
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
@@ -49,15 +50,18 @@ const StyledDiv = styled.div`
 
 function LogIn() : JSX.Element {
     return (
-        <StyledDiv>
-            <h1>LOGIN</h1>
-            <form>
-                <input type="text" placeholder="ID"/>
-                <input type="password" placeholder="Password"/>
-                <button>LogIn</button>
-                <button>SignUp</button>
-            </form>
-        </StyledDiv>
+        <>
+            <Header />
+            <StyledDiv>
+                <h1>LOGIN</h1>
+                <form>
+                    <input type="text" placeholder="ID"/>
+                    <input type="password" placeholder="Password"/>
+                    <button>LogIn</button>
+                    <button>SignUp</button>
+                </form>
+            </StyledDiv>
+        </>
     );
 }
 
