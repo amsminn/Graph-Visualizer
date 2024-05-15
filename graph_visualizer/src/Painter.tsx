@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Screen from './Screen';
 import { useRef } from 'react';
+import { LogInContext } from './Context';
 
 const Div = styled.div`
     display: flex;
@@ -46,6 +47,7 @@ const SaveImageButton = styled.button`
 `;
 
 function Painter({ data, flag } : { data : string, flag : boolean }) : JSX.Element {
+    const userID = React.useContext(LogInContext).userID;
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const onClick = () => {
         if(canvasRef && canvasRef.current) {
@@ -57,10 +59,27 @@ function Painter({ data, flag } : { data : string, flag : boolean }) : JSX.Eleme
             a.click();
         }
     };
+    const saveClick = () => {
+        let input = prompt("Enter the name of Data");
+        if(input) {
+            fetch("http://localhost:3001/api/Save", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ 
+                    data: data, 
+                    id: userID,
+                    title: input,
+                    date: new Date().toLocaleString()
+                 })
+            });
+        }
+    };
     return (
         <Div>
             <div className="load-export">
-                <button className="save">SAVE</button>
+                <button className="save" onClick={saveClick}>SAVE</button>
                 <SaveImageButton onClick={onClick}>SAVE as JPG</SaveImageButton>
             </div>
             <Screen data={data} flag={flag} canvasRef={canvasRef} />

@@ -8,6 +8,7 @@ const port = 3001;
 
 const db = await DB();
 const user = db.collection('User');
+const dataDB = db.collection('Data');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -45,4 +46,15 @@ app.post("/api/LogIn", async (req, res) => {
     } else {
         return res.status(400).send({success: false, message: ("User" + userID + "does not exist")});
     }
+});
+
+app.post("/api/Save", async (req, res) => {
+    const {id: userID, title: title, data: data, date: date} = req.body;
+    console.log(req.body);
+    await dataDB.insertOne({userID: userID, title: title, data: data, date: date});
+});
+
+app.post("/api/Cloud", async (req, res) => {
+    const ret = await dataDB.find({}).toArray();
+    return res.status(200).send(ret);
 });

@@ -64,7 +64,6 @@ const Logo = styled(Link)`
 
 function Header() : JSX.Element {
   const {userID: id, setUserID: setId} = useContext(LogInContext);
-  console.log(id);
   const onClick = () => {
     setId(null);
   }

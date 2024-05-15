@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Header from './Header';
 import { LogInContext } from './Context';
@@ -36,8 +36,28 @@ const StyledDiv = styled.div`
     }
 `;
 
+interface CloudData {
+    title: string;
+    userID: string;
+    date: string;
+    data: string;
+}
+
 function Cloud(): JSX.Element {
     const {userID: id, setUserID: setId} = useContext(LogInContext);
+    const [dataArr, setDataArr] = useState<Array<CloudData>>([]);
+    useEffect(() => {
+        const f = async () => {
+            const dataArr = await fetch("http://localhost:3001/api/Cloud", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }).then((res) => res.json());
+            setDataArr(dataArr);
+        };
+        f();
+    }, []);
     return (
         <>
             <LogInContext.Provider value={{ userID: id, setUserID: setId }}>
@@ -54,11 +74,20 @@ function Cloud(): JSX.Element {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Sample Title</td>
-                            <td>Sample Author</td>
-                            <td>2022-05-15</td>
-                        </tr>
+                        {  
+                            dataArr.map(({ 
+                                title, 
+                                userID, 
+                                date,
+                                data
+                            }) => (
+                                <tr key={userID}>
+                                    <td>{title}</td>
+                                    <td>{userID}</td>
+                                    <td>{date}</td>
+                                </tr>
+                            ))
+                        }
                     </tbody>
                 </table>
             </StyledDiv>
@@ -66,4 +95,4 @@ function Cloud(): JSX.Element {
     );
 }
 
-export default React.memo(Cloud);
+export default Cloud;
