@@ -6,6 +6,7 @@ import LogIn from './LogIn';
 import SignUp from './SignUp';
 import Cloud from './Cloud';
 import reportWebVitals from './reportWebVitals';
+import { LogInContext } from './Context';
 
 import {
   createBrowserRouter, 
@@ -38,8 +39,27 @@ const Router = createBrowserRouter([
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+function Main(): JSX.Element {
+  const [id, setID] = React.useState<string | null>(localStorage.getItem('userID'));
+  const setIdWithLocalStorage = (id: string | null) => {
+    if(id !== '' && id !== null) {
+      localStorage.setItem('userID', id);
+      setID(id);
+    } else {
+      localStorage.clear();
+      setID(null);
+    }
+  };
+  return (
+    <LogInContext.Provider value={{ userID: id, setUserID: setIdWithLocalStorage }}>
+        <RouterProvider router={Router} />
+    </LogInContext.Provider>
+  );
+}
+
 root.render(
-    <RouterProvider router={Router} />
+    <Main />
 );
 
 // If you want to start measuring performance in your app, pass a function

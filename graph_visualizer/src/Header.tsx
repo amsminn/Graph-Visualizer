@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { isLoggedIn, userID } from './Context';
+import { LogInContext } from './Context';
 import { Link } from 'react-router-dom';
 
 const Div = styled.header`
@@ -63,15 +63,18 @@ const Logo = styled(Link)`
 `;
 
 function Header() : JSX.Element {
-  const flag = useContext(isLoggedIn);
-  const id = useContext(userID);
+  const {userID: id, setUserID: setId} = useContext(LogInContext);
+  console.log(id);
+  const onClick = () => {
+    setId(null);
+  }
   return (
     <Div className="header">
         <div className="left-logo"><Logo to="/">Graph Visualizer</Logo></div>
         <div className="right-box"> 
           <ul className="menu">
             <li><StyledLink to="/Cloud">CLOUD</StyledLink></li>
-            {flag && id !== null ? (<li><p>{id.toUpperCase()}</p></li>) : 
+            {id !== null ? (<><li><p>{id.toUpperCase()}</p></li><li><StyledLink to="/" onClick={onClick}>LOGOUT</StyledLink></li></>) : 
             (<><li><StyledLink to="/LogIn">LOGIN</StyledLink></li><li><StyledLink to="/SignUp">SIGNUP</StyledLink></li></>)}
           </ul> 
         </div>  
@@ -79,4 +82,4 @@ function Header() : JSX.Element {
   );
 }
 
-export default React.memo(Header);
+export default Header;

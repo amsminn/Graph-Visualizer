@@ -1,4 +1,8 @@
 import React from 'react';
 
-export const isLoggedIn = React.createContext<boolean>(false);
-export const userID = React.createContext<string | null>(null);
+export interface loginContext {
+    userID: string | null;
+    setUserID: (id: string | null) => void;
+}
+
+export const LogInContext = React.createContext<loginContext>({ userID: null, setUserID: () => {} });

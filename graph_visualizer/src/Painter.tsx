@@ -28,12 +28,9 @@ const Div = styled.div`
             background-color: #4b4e6a;
             border-top-left-radius: 20px;
             border-bottom-left-radius: 20px;
-            margin-right: 0;
-        }
-        .import {
             border-top-right-radius: 20px;
             border-bottom-right-radius: 20px;
-            margin-left: 0;
+            margin-right: 0;
         }
     }
 `;
@@ -64,7 +61,6 @@ function Painter({ data, flag } : { data : string, flag : boolean }) : JSX.Eleme
         <Div>
             <div className="load-export">
                 <button className="save">SAVE</button>
-                <button className="import">IMPORT</button>
                 <SaveImageButton onClick={onClick}>SAVE as JPG</SaveImageButton>
             </div>
             <Screen data={data} flag={flag} canvasRef={canvasRef} />

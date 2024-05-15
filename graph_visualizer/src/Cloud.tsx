@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import Header from './Header';
-import { isLoggedIn, userID } from './Context';
+import { LogInContext } from './Context';
 
 const StyledDiv = styled.div`
     border-radius: 10px;
@@ -37,15 +37,12 @@ const StyledDiv = styled.div`
 `;
 
 function Cloud(): JSX.Element {
-    const flag = useContext(isLoggedIn);
-    const id = useContext(userID);
+    const {userID: id, setUserID: setId} = useContext(LogInContext);
     return (
         <>
-            <isLoggedIn.Provider value={flag}>
-                <userID.Provider value={id}>
-                    <Header></Header>
-                </userID.Provider>
-            </isLoggedIn.Provider>
+            <LogInContext.Provider value={{ userID: id, setUserID: setId }}>
+                <Header></Header>
+            </LogInContext.Provider>
             <StyledDiv>
                 <h1>Cloud</h1>
                 <table>

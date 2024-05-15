@@ -1,7 +1,8 @@
 import React from 'react';
 import Header from './Header';
 import styled from 'styled-components';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { LogInContext } from './Context';
+import { useNavigate } from 'react-router-dom';
 
 const StyledDiv = styled.div`
     display: flex;
@@ -50,6 +51,7 @@ const StyledDiv = styled.div`
 `;
 
 function LogIn() : JSX.Element {
+    const loginContext = React.useContext(LogInContext);
     const id = React.useRef<HTMLInputElement>(null);
     const password = React.useRef<HTMLInputElement>(null);
     const navigate = useNavigate();
@@ -68,6 +70,8 @@ function LogIn() : JSX.Element {
         const data = await res.json();
         alert(data.message);
         if(data.success) {
+            console.log(loginContext.setUserID.toString());
+            loginContext.setUserID(id.current?.value??null);
             navigate("/");
         }
     };

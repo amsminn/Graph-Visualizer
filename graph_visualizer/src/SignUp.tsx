@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from './Header';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const StyledDiv = styled.div`
     display: flex;
