@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import Editor from './Editor';
 import Painter from './Painter';
+import { GraphDataContext } from './Context';
 
 const Div = styled.div`
     margin-top: 30px;
@@ -26,6 +27,13 @@ function Body() : JSX.Element {
   const [flag, setFlag] = useState(false);
   const [text, setText] = useState<string>("");
   const [lineNum, setLineNum] = useState<string>("");
+  const {data, setData} = useContext(GraphDataContext);
+  React.useEffect(() => {
+    if(data !== null) {
+      setText(data);
+      setData(null);
+    }
+  }, [data]); 
   const onChange = (e : React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.target.value);
     let str = '';

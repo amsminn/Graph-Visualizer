@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Header from './Header';
-import { LogInContext } from './Context';
+import { GraphDataContext, LogInContext } from './Context';
+import { useNavigate } from 'react-router-dom';
 
 const StyledDiv = styled.div`
     border-radius: 10px;
@@ -36,6 +37,11 @@ const StyledDiv = styled.div`
     }
 `;
 
+const Cell = styled.td`
+    text-decoration: underline;
+    color: blue;
+`;
+
 interface CloudData {
     title: string;
     userID: string;
@@ -44,6 +50,7 @@ interface CloudData {
 }
 
 function Cloud(): JSX.Element {
+    const navigate = useNavigate();
     const {userID: id, setUserID: setId} = useContext(LogInContext);
     const [dataArr, setDataArr] = useState<Array<CloudData>>([]);
     useEffect(() => {
@@ -58,6 +65,11 @@ function Cloud(): JSX.Element {
         };
         f();
     }, []);
+    const setData = useContext(GraphDataContext).setData;
+    const onClick = (data : string) => {
+        setData(data);
+        navigate("/");
+    };
     return (
         <>
             <LogInContext.Provider value={{ userID: id, setUserID: setId }}>
@@ -82,7 +94,9 @@ function Cloud(): JSX.Element {
                                 data
                             }) => (
                                 <tr key={userID}>
-                                    <td>{title}</td>
+                                    <Cell onClick={() => {
+                                        onClick(data);
+                                    }}>{title}</Cell>
                                     <td>{userID}</td>
                                     <td>{date}</td>
                                 </tr>

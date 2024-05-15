@@ -7,6 +7,7 @@ import SignUp from './SignUp';
 import Cloud from './Cloud';
 import reportWebVitals from './reportWebVitals';
 import { LogInContext } from './Context';
+import { GraphDataContext } from './Context';
 
 import {
   createBrowserRouter, 
@@ -41,6 +42,7 @@ const root = ReactDOM.createRoot(
 );
 
 function Main(): JSX.Element {
+  const [data, setData] = React.useState<string | null>(null);
   const [id, setID] = React.useState<string | null>(localStorage.getItem('userID'));
   const setIdWithLocalStorage = (id: string | null) => {
     if(id !== '' && id !== null) {
@@ -50,10 +52,14 @@ function Main(): JSX.Element {
       localStorage.clear();
       setID(null);
     }
+    console.log(id);
+    console.trace();
   };
   return (
     <LogInContext.Provider value={{ userID: id, setUserID: setIdWithLocalStorage }}>
+      <GraphDataContext.Provider value={{ data: data, setData: setData }}> 
         <RouterProvider router={Router} />
+      </GraphDataContext.Provider>
     </LogInContext.Provider>
   );
 }
