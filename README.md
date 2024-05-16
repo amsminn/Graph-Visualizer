@@ -11,8 +11,8 @@
 -   MongoDB, mongoose
 
 ### run server
-insert your MongoDB connect url in ./server/DB.js
-run ./server/server.js 
+insert your MongoDB connect url in `./server/DB.js` <br/>
+run `./server/server.js `
 ```
 cd server
 npm i
@@ -20,7 +20,7 @@ node app
 ```
 
 ### run client
-run React Project ./graph_visualizer
+run React Project `./graph_visualizer`
 ```
 cd graph_visualizer
 npm i
