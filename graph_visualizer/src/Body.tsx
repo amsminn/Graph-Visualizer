@@ -44,7 +44,15 @@ function Body() : JSX.Element {
   return (
     <Div>
         <span>
-          <Editor text={text} setText={setText} lineNum={lineNum} setLineNum={setLineNum} onChange={onChange} flag={flag} setFlag={setFlag} />
+          <Editor 
+            text={text} 
+            setText={setText} 
+            lineNum={lineNum} 
+            setLineNum={setLineNum} 
+            onChange={onChange} 
+            flag={flag} 
+            setFlag={setFlag}
+          />
         </span>
         <span className="Painter">
           <Painter data={text} flag={flag}/>
