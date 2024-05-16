@@ -85,6 +85,7 @@ const Screen = ({ data, flag, canvasRef } : { data : string, flag : boolean, can
     const outerDiv = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        if(vertex === 0) return;
         let size = parseInt(data.split("\n")[0]);
         let ret = [];
         for(let i = 1; i <= size; i++) ret.push({
