@@ -101,7 +101,7 @@ const Screen = ({ data, flag, canvasRef } : { data : string, flag : boolean, can
         let lines = data.trim().split("\n");
         for(let i = 1; i < lines.length; i++) {
             let [a, b] = lines[i].split(" ").map(x => parseInt(x));
-            if(a && b) ret.push([a, b]);
+            if(a && b && 1 <= a && a <= vertex && 1 <= b && b <= vertex) ret.push([a, b]);
         }
         updateEdges(ret);
     }, [data]);
