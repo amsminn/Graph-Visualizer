@@ -4,7 +4,7 @@ import Body from './Body';
 
 function App(): JSX.Element {
   return (
-      <div className="App">
+      <div>
         <Header />
         <Body />
       </div>
