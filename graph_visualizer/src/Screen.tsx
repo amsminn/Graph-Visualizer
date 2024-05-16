@@ -75,8 +75,6 @@ const Edge = ({ node1, node2, flag }: { node1: Node, node2: Node, flag : boolean
 };
 
 const Screen = ({ data, flag, canvasRef } : { data : string, flag : boolean, canvasRef : any }) => {
-    console.log("Screen" + data);
-
     const [nodes, updateNodes] = React.useState<Node[]>([]);
     const [edges, updateEdges] = React.useState<[number, number][]>([]);
 
